@@ -120,7 +120,7 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/task-management-app.git
+   git clone https://github.com/ddarkclay/kanban-board.git
    cd task-management-app
    ```
 
@@ -231,7 +231,7 @@ Expected response:
 
 ## 🎥 Demo Video
 
-[Watch the demo video](https://youtu.be/your-demo-video-link) to see the application in action.
+[Watch the demo video](https://www.loom.com/share/10ff9dabaf904c4e9f232be050e84190?sid=051d3a25-eed4-43c3-9637-c384e0e2b36f) to see the application in action.
 
 ## 📝 Author  
 **Vaibhav Chaudhari**  
