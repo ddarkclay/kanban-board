@@ -1,0 +1,117 @@
+{
+  "paths": {
+    "/transact/{walletId}": {
+      "post": {
+        "summary": "Credit or debit an amount to/from a wallet",
+        "tags": ["Transaction"],
+        "parameters": [
+          {
+            "name": "walletId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": 10.0000
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Recharge"
+                  }
+                },
+                "required": ["amount", "description"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "balance": { "type": "number" },
+                    "transactionId": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Wallet not found"
+          },
+          "400": {
+            "description": "Insufficient balance"
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Fetch transactions for a wallet",
+        "tags": ["Transaction"],
+        "parameters": [
+          {
+            "name": "walletId",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "example": 0 }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "example": 10 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "walletId": { "type": "string" },
+                      "amount": { "type": "number" },
+                      "balance": { "type": "number" },
+                      "description": { "type": "string" },
+                      "date": { "type": "string", "format": "date-time" },
+                      "type": {
+                        "type": "string",
+                        "enum": ["CREDIT", "DEBIT"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No transactions found"
+          }
+        }
+      }
+    }
+  }
+}

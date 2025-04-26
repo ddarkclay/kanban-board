@@ -1,0 +1,85 @@
+{
+  "paths": {
+    "/setup": {
+      "post": {
+        "summary": "Setup a new wallet",
+        "tags": ["Wallet"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "balance": {
+                    "type": "number",
+                    "example": 20.5612
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Wallet A"
+                  }
+                },
+                "required": ["balance", "name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Wallet created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "balance": { "type": "number" },
+                    "transactionId": { "type": "string" },
+                    "name": { "type": "string" },
+                    "date": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wallet/{id}": {
+      "get": {
+        "summary": "Get wallet details by ID",
+        "tags": ["Wallet"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wallet details fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "balance": { "type": "number" },
+                    "name": { "type": "string" },
+                    "date": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Wallet not found"
+          }
+        }
+      }
+    }
+  }
+}
